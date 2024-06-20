@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 const useForm = (callback) => {
-  const [values, setValues] = useState({}); //store value
+  const [values, setValues] = useState({}); // store value
   const [errors, setErrors] = useState({}); // store error
 
   //   handleChange
@@ -12,6 +12,7 @@ const useForm = (callback) => {
       ...values,
       [name]: value,
     });
+    console.log("handleChange", values);
   };
 
   //handleSubmit
@@ -19,9 +20,11 @@ const useForm = (callback) => {
     event.preventDefault();
     const validationErrors = validate(values);
     setErrors(validationErrors);
-    if (Object.keys(validationErrors).length === 0) {
-      callback();
-    }
+    console.log("validation error is ", validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) callback();
+
+    console.log("on handle submit", values);
   };
 
   //validation
@@ -32,6 +35,17 @@ const useForm = (callback) => {
     if (!values.name) {
       errors.name = "Name is required";
     }
+    // // full name
+    // if (!values.fullName) {
+    //   errors.name = "fullName is required";
+    // }
+
+    // // Age validation
+    // if (!values.phoneNumber) {
+    //   errors.age = "Age is required";
+    // } else if (isNaN(values.age) || values.age <= 0) {
+    //   errors.age = "Age must be a number greater than 0";
+    // }
 
     // Email validation
     if (!values.email) {
