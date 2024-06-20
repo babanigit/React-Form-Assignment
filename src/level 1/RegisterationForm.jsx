@@ -20,7 +20,7 @@ const RegisterationForm = () => {
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
-              placeholder="name"
+              placeholder="Name"
               className="bg-slate-100 p-3 rounded-lg border-2"
               onChange={handleChange}
               type="text"
@@ -31,7 +31,7 @@ const RegisterationForm = () => {
             {errors.name && <p className=" text-red-300">{errors.name}</p>}
 
             <input
-              placeholder="email"
+              placeholder="Email"
               className="bg-slate-100 p-3 rounded-lg border-2"
               onChange={handleChange}
               type="email"
@@ -42,7 +42,7 @@ const RegisterationForm = () => {
             {errors.email && <p className=" text-red-300">{errors.email}</p>}
 
             <input
-              placeholder="age"
+              placeholder="Age"
               className="bg-slate-100 p-3 rounded-lg border-2"
               type="number"
               name="age"
@@ -81,9 +81,8 @@ const RegisterationForm = () => {
                 )}
               </div>
             )}
-
             <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
-              submit
+              Submit
             </button>
           </form>
         </div>
