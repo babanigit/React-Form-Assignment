@@ -1,5 +1,5 @@
-import useForm from "../customHooks/useForm";
-
+import { useEffect } from "react";
+import useForm from "./customHooks/useForm2";
 const RegisterationForm2 = () => {
   const { values, errors, handleChange, handleSubmit } = useForm(submitForm);
 
@@ -8,6 +8,10 @@ const RegisterationForm2 = () => {
     console.log(values);
     alert(JSON.stringify(values, null, 2));
   }
+
+  useEffect(() => {
+    console.log("hello");
+  }, [handleChange]);
 
   return (
     <>
@@ -58,11 +62,12 @@ const RegisterationForm2 = () => {
               <p className=" text-red-300">{errors.phoneNumber}</p>
             )}
 
+            {/* apply for position */}
             <div className=" flex  gap-2 place-items-center ">
               <label>Applying for Position:</label>
               <select
                 name="applyForPosition"
-                value={values.applyForPosition || "no"}
+                value={values.applyForPosition || ""}
                 onChange={handleChange}
                 className="bg-slate-100 p-3 rounded-lg border-2"
               >
@@ -71,31 +76,68 @@ const RegisterationForm2 = () => {
                 <option value="designer">Designer</option>
                 <option value="manager">Manager</option>
               </select>
-              {errors.applyingForPosition && (
-                <p className="error">{errors.applyingForPosition}</p>
+              {errors.applyForPosition && (
+                <p className=" text-red-300">{errors.applyForPosition}</p>
               )}
             </div>
 
-            {(values.applyingForPosition === "developer" ||
-              values.applyingForPosition === "designer") && (
+            {/* relevantExperience */}
+            {(values.applyForPosition === "developer" ||
+              values.applyForPosition === "designer") && (
               <div>
                 <input
+                  placeholder="Relevant Experience"
                   type="number"
                   name="relevantExperience"
                   value={values.relevantExperience || ""}
                   onChange={handleChange}
                   required={
-                    values.applyingForPosition === "developer" ||
-                    values.applyingForPosition === "designer"
+                    values.applyForPosition === "developer" ||
+                    values.applyForPosition === "designer"
                   }
                   min="1"
                   className="bg-slate-100 p-3 rounded-lg border-2"
                 />
                 {errors.relevantExperience && (
-                  <p className="error">{errors.relevantExperience}</p>
+                  <p className=" text-red-300">{errors.relevantExperience}</p>
                 )}
               </div>
             )}
+
+            {/* if applyed for designer */}
+            {values.applyForPosition === "designer" && (
+              <input
+                className="bg-slate-100 p-3 rounded-lg border-2"
+                placeholder="Portfolio URL"
+                type="url"
+                name="portfolioURL"
+                value={values.portfolioURL}
+                onChange={handleChange}
+                required={values.applyForPosition === "designer"}
+              />
+            )}
+            {errors.portfolioURL && (
+              <p className=" text-red-300">{errors.portfolioURL}</p>
+            )}
+
+            {/* Management Experience */}
+            {values.applyForPosition === "manager" && (
+              <input
+                className="bg-slate-100 p-3 rounded-lg border-2"
+                placeholder="Mangement Experience"
+                type="text"
+                name="managementExperience"
+                value={values.managementExperience}
+                onChange={handleChange}
+                required={values.applyForPosition === "manager"}
+              />
+            )}
+            {errors.managementExperience && (
+              <p className=" text-red-300">{errors.managementExperience}</p>
+            )}
+
+
+       
 
             <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
               Submit

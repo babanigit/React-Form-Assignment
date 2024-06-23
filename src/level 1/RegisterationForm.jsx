@@ -1,4 +1,6 @@
-import useForm from "../customHooks/useForm";
+import useForm from "./customHooks/useForm";
+
+useForm
 
 const RegisterationForm = () => {
   const { values, errors, handleChange, handleSubmit } = useForm(submitForm);
